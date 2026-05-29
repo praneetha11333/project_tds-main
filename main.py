@@ -32,7 +32,6 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Add CORS middleware if needed
 from fastapi.middleware.cors import CORSMiddleware
 app.add_middleware(
     CORSMiddleware,
@@ -139,7 +138,7 @@ async def write_code_llm(data: dict) -> list:
     existing_files = data.get("existing_files", {})
     task = data.get("task", "project")
 
-    # Detect attachment types and summarize them
+    # Detect attachment types 
     if attachments:
         results = await asyncio.gather(*(detect_attachment_type(att) for att in attachments))
         attachment_info = [f"{att['name']} ({typ})" for att, typ in zip(attachments, results) if att.get("name")]
@@ -147,7 +146,7 @@ async def write_code_llm(data: dict) -> list:
     else:
         attachment_list_str = "None"
 
-    # Format checks into a bullet list for prompt clarity
+  
     
 
     # Base system prompt — expert full-stack developer, output JSON array only
